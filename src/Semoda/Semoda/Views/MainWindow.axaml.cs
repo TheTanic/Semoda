@@ -1,11 +1,12 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 
-namespace Semoda.Views;
-
-public partial class MainWindow : Window
+namespace Semoda.Views
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }

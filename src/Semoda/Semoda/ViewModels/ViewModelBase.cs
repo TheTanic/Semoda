@@ -1,7 +1,8 @@
-﻿using ReactiveUI;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Semoda.ViewModels;
-
-public class ViewModelBase : ReactiveObject
+namespace Semoda.ViewModels
 {
+    public class ViewModelBase : ObservableObject
+    {
+    }
 }
