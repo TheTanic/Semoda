@@ -3,10 +3,50 @@
         xmlns:vm="using:Semoda.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:Semoda.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Semoda.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Semoda">
-        <views:MainView />
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
+
+	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
+			   OpenPaneLength="200"
+			   Background="{DynamicResource SystemControlPageBackgroundChromeLowBrush}"
+			   DisplayMode="CompactOverlay"
+			   CompactPaneLength="55">
+		<SplitView.Pane>
+			<StackPanel Spacing="5"
+						Margin="5">
+				<Button Command="{Binding TriggerHamburgerCommand}" Width="45" Height="45" Margin="0,0,0,10">
+					<PathIcon Data="{StaticResource Hamburger}" />
+				</Button>
+				<ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding SelectedMenuItem}">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:MenuListItemViewModel}">
+							<StackPanel Spacing="15" Orientation="Horizontal">
+								<PathIcon Data="{Binding Icon}" />
+								<TextBlock Text="{Binding Label}"
+										   VerticalAlignment="Bottom"
+										   FontSize="{StaticResource FontSizeLarge}"
+										   FontWeight="ExtraBlack" />
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+		</SplitView.Pane>
+		<SplitView.Content>
+			<Border CornerRadius="12 0 0 0"
+					Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+					Padding="10">
+				<TransitioningContentControl Content="{Binding CurrentPage}" />
+			</Border>
+		</SplitView.Content>
+	</SplitView>
 </Window>
