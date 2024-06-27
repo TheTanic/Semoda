@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 
 namespace Semoda.Views
 {
@@ -14,6 +15,14 @@ namespace Semoda.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnLoaded(RoutedEventArgs e)
+        {
+            base.OnLoaded(e);
+            MinWidth = 600;
+            MinHeight = 600;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Semoda.Views.Pages;
 /// </summary>
 public partial class DashboardPageView : UserControl
 {
-    private static readonly double MIN_SIZE_GRID = 400d;
+    private static readonly double MIN_SIZE_GRID = 200d;
 
     /// <summary>
     /// Default constructor

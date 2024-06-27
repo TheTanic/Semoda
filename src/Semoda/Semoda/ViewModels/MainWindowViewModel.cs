@@ -19,10 +19,10 @@ namespace Semoda.ViewModels
 
         /// <summary>
         /// Flag to indicate if the splitview pane is open. <br/>
-        /// The default is <see langword="true"/>
+        /// The default is <see langword="false"/>
         /// </summary>
         [ObservableProperty]
-        private bool _isPaneOpen = true;
+        private bool _isPaneOpen = false;
 
         /// <summary>
         /// Marker to the currently selected menu item of the splitview pane.
@@ -61,6 +61,7 @@ namespace Semoda.ViewModels
                 return;
 
             CurrentPage = (ViewModelBase)instance;
+            IsPaneOpen = false;
         }
 
         /// <summary>

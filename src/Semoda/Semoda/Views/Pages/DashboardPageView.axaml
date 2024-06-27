@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:Semoda.ViewModels"
+			 xmlns:ctr="using:Semoda.Views.Controls"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
              x:Class="Semoda.Views.Pages.DashboardPageView">
 	<Design.DataContext>
@@ -15,6 +16,31 @@
 			  HorizontalAlignment="Stretch"
 			  Background="Transparent"
 			  RowDefinitions="*, *, *, *"
-			  ColumnDefinitions="*, *, *">
+			  ColumnDefinitions="*, *, *, *">
+			<ctr:DashboardElementContainer Grid.Column="0"
+										   Grid.Row="0"/>
+			<ctr:DashboardElementContainer Grid.Column="1"
+										   Grid.Row="0"/>
+			<ctr:DashboardElementContainer Grid.Column="2"
+										   Grid.Row="0"/>
+			<ctr:DashboardElementContainer Grid.Column="3"
+										   Grid.Row="0"
+										   Grid.RowSpan="2"/>
+			<ctr:DashboardElementContainer Grid.Column="0"
+										   Grid.Row="1"
+										   Grid.ColumnSpan="2"
+										   Grid.RowSpan="2"/>
+			<ctr:DashboardElementContainer Grid.Column="2"
+										   Grid.Row="1"/>
+			<ctr:DashboardElementContainer Grid.Column="2"
+										   Grid.Row="2"
+										   Grid.ColumnSpan="2"/>
+			<ctr:DashboardElementContainer Grid.Column="0"
+										   Grid.Row="4"/>
+			<ctr:DashboardElementContainer Grid.Column="1"
+										   Grid.Row="3"
+										   Grid.ColumnSpan="2"/>
+			<ctr:DashboardElementContainer Grid.Column="3"
+										   Grid.Row="3"/>
 		</Grid>
 </UserControl>

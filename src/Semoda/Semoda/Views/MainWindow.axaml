@@ -18,13 +18,13 @@
 	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
 			   OpenPaneLength="200"
 			   Background="{DynamicResource SystemControlPageBackgroundChromeLowBrush}"
-			   DisplayMode="CompactInline"
+			   DisplayMode="CompactOverlay"
 			   CompactPaneLength="55">
 		<SplitView.Pane>
 			<StackPanel Spacing="5"
 						Margin="5">
-				<Button Command="{Binding TriggerHamburgerCommand}" Width="45">
-					<PathIcon Data="{StaticResource Hamburger}"/>
+				<Button Command="{Binding TriggerHamburgerCommand}" Width="45" Height="45" Margin="0,0,0,10">
+					<PathIcon Data="{StaticResource Hamburger}" />
 				</Button>
 				<ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding SelectedMenuItem}">
 					<ListBox.ItemTemplate>
@@ -34,7 +34,7 @@
 								<TextBlock Text="{Binding Label}"
 										   VerticalAlignment="Bottom"
 										   FontSize="{StaticResource FontSizeLarge}"
-										   FontWeight="ExtraBlack"/>
+										   FontWeight="ExtraBlack" />
 							</StackPanel>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
@@ -43,7 +43,8 @@
 		</SplitView.Pane>
 		<SplitView.Content>
 			<Border CornerRadius="12 0 0 0"
-					Background="{DynamicResource SystemControlBackgroundBaseLowBrush}">
+					Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+					Padding="10">
 				<TransitioningContentControl Content="{Binding CurrentPage}" />
 			</Border>
 		</SplitView.Content>
