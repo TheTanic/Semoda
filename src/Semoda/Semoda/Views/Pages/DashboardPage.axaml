@@ -5,7 +5,7 @@
 			 xmlns:vm="using:Semoda.ViewModels"
 			 xmlns:ctr="using:Semoda.Views.Controls"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
-             x:Class="Semoda.Views.Pages.DashboardPageView">
+             x:Class="Semoda.Views.Pages.DashboardPage">
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
