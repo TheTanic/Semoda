@@ -22,7 +22,7 @@ namespace Semoda
                 className = data.GetType().FullName!.Replace("ViewModels.", "Views.Pages.", StringComparison.Ordinal);
             else
                 className = data.GetType().FullName!;
-            className = className.Replace("ViewModel", "View", StringComparison.Ordinal);
+            className = className.Replace("ViewModel", "", StringComparison.Ordinal);
             var type = Type.GetType(className);
 
             if (type != null)

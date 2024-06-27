@@ -3,15 +3,15 @@
 namespace Semoda.ViewModels
 {
     /// <summary>
-    /// View model for the <see cref="DashboardPage"/>.
+    /// View model for the <see cref="SettingsPage"/>
     /// </summary>
-    public class DashboardPageViewModel : ViewModelBase
+    public class SettingsPageViewModel : ViewModelBase
     {
         /// <summary>
         /// Default constructor. <br/>
         /// Sets the <see cref="ViewModelBase.IsPage"/> to <see langword="true"/>
         /// </summary>
-        public DashboardPageViewModel()
+        public SettingsPageViewModel()
         {
             IsPage = true;
         }

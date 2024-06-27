@@ -6,14 +6,14 @@ namespace Semoda.Views.Pages;
 /// <summary>
 /// Page to show a single dashboard.
 /// </summary>
-public partial class DashboardPageView : UserControl
+public partial class DashboardPage : UserControl
 {
     private static readonly double MIN_SIZE_GRID = 200d;
 
     /// <summary>
     /// Default constructor
     /// </summary>
-    public DashboardPageView()
+    public DashboardPage()
     {
         InitializeComponent();
     }

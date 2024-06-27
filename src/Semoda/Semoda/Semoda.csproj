@@ -33,4 +33,10 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Pages\DashboardPage.axaml.cs">
+      <DependentUpon>DashboardPage.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

@@ -44,7 +44,8 @@ namespace Semoda.ViewModels
         /// </summary>
         public ObservableCollection<MenuListItemViewModel> MenuItems { get; } = new ObservableCollection<MenuListItemViewModel>()
         {
-            new MenuListItemViewModel(typeof(DashboardPageViewModel), "Dashboard")
+            new MenuListItemViewModel(typeof(DashboardPageViewModel), "Dashboard"),
+            new MenuListItemViewModel(typeof(SettingsPageViewModel), "Settings")
         };
 
         /// <summary>
