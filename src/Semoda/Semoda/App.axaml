@@ -13,6 +13,4 @@
 		<FluentTheme />
 		<StyleInclude Source="avares://Semoda/Assets/Icons.axaml"></StyleInclude>
 	</Application.Styles>
-	<Application.Resources>
-	</Application.Resources>
 </Application>

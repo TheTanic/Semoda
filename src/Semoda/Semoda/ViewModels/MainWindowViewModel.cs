@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Semoda.Assets.Languages;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -44,8 +45,8 @@ namespace Semoda.ViewModels
         /// </summary>
         public ObservableCollection<MenuListItemViewModel> MenuItems { get; } = new ObservableCollection<MenuListItemViewModel>()
         {
-            new MenuListItemViewModel(typeof(DashboardPageViewModel), "Dashboard"),
-            new MenuListItemViewModel(typeof(SettingsPageViewModel), "Settings")
+            new MenuListItemViewModel(typeof(DashboardPageViewModel), "Dashboard", Resources.MenuEntryDashboard),
+            new MenuListItemViewModel(typeof(SettingsPageViewModel), "Settings", Resources.MenuEntrySettings)
         };
 
         /// <summary>

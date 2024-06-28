@@ -4,7 +4,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Semoda.ViewModels;
 using Semoda.Views;
-using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace Semoda
 {
@@ -22,6 +22,7 @@ namespace Semoda
         /// <inheritdoc/>
         public override void OnFrameworkInitializationCompleted()
         {
+            Assets.Languages.Resources.Culture = new CultureInfo("");
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Line below is needed to remove Avalonia data validation.
