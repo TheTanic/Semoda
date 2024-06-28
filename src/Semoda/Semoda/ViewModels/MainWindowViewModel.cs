@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using Semoda.Assets.Languages;
+using Semoda.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -29,36 +31,35 @@ namespace Semoda.ViewModels
         /// Marker to the currently selected menu item of the splitview pane.
         /// </summary>
         [ObservableProperty]
-        private MenuListItemViewModel _selectedMenuItem;
+        private MenuListItemModel _selectedMenuItem;
 
         /// <summary>
         /// Default constructor. <br/>
         /// Sets the current selected menu item to the first.
         /// </summary>
-        public MainWindowViewModel()
+        public MainWindowViewModel() : base(false)
         {
             SelectedMenuItem = MenuItems.First();
         }
 
         /// <summary>
-        ///Collection of all available <see cref="MenuListItemViewModel"/> of the splitview pane.
+        ///Collection of all available <see cref="MenuListItemModel"/> of the splitview pane.
         /// </summary>
-        public ObservableCollection<MenuListItemViewModel> MenuItems { get; } = new ObservableCollection<MenuListItemViewModel>()
+        public ObservableCollection<MenuListItemModel> MenuItems { get; } = new ObservableCollection<MenuListItemModel>()
         {
-            new MenuListItemViewModel(typeof(DashboardPageViewModel), "Dashboard", Resources.MenuEntryDashboard),
-            new MenuListItemViewModel(typeof(SettingsPageViewModel), "Settings", Resources.MenuEntrySettings)
+            new MenuListItemModel(typeof(DashboardPageViewModel), "Dashboard", Resources.MenuEntryDashboard),
+            new MenuListItemModel(typeof(SettingsPageViewModel), "Settings", Resources.MenuEntrySettings)
         };
 
         /// <summary>
         /// Handler to react on a change of <see cref="SelectedMenuItem"/>.
         /// </summary>
         /// <param name="value">The new value of <see cref="SelectedMenuItem"/></param>
-        partial void OnSelectedMenuItemChanged(MenuListItemViewModel value)
+        partial void OnSelectedMenuItemChanged(MenuListItemModel value)
         {
             if (value == null)
                 return;
-
-            object? instance = Activator.CreateInstance(value.ModelType);
+            object? instance = ServiceProvider.GetService(value.ModelType);
             if (instance == null || instance is not ViewModelBase)
                 return;
 
