@@ -16,10 +16,11 @@ namespace Semoda.ViewModels
         /// </summary>
         /// <param name="type">Type of the viewmodel, which is linked to the menu</param>
         /// <param name="iconKey">Key of the icon, which should be presented</param>
-        public MenuListItemViewModel(Type type, string iconKey)
+        /// <param name="label">Value of the label that should be displayed</param>
+        public MenuListItemViewModel(Type type, string iconKey, string label)
         {
             ModelType = type;
-            Label = type.Name.Replace("PageViewModel", "");
+            Label = label;
             Application.Current!.TryFindResource(iconKey, out var res);
             if (res != null && res is StreamGeometry)
                 Icon = (StreamGeometry)res;
