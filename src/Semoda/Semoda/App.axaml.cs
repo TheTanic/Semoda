@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.DependencyInjection;
+using Semoda.Utils;
 using Semoda.ViewModels;
 using Semoda.Views;
 using System.Globalization;
@@ -23,6 +25,7 @@ namespace Semoda
         public override void OnFrameworkInitializationCompleted()
         {
             Assets.Languages.Resources.Culture = new CultureInfo("");
+            AppServiceProvider appServiceProvider = AppServiceProvider.InitInstance();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Line below is needed to remove Avalonia data validation.
@@ -30,7 +33,7 @@ namespace Semoda
                 BindingPlugins.DataValidators.RemoveAt(0);
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = appServiceProvider.ServiceProvider.GetRequiredService<MainWindowViewModel>()
                 };
             }
 

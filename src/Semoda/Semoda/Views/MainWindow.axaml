@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Semoda.ViewModels"
+		xmlns:mo="using:Semoda.Models"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -28,7 +29,7 @@
 				</Button>
 				<ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding SelectedMenuItem}">
 					<ListBox.ItemTemplate>
-						<DataTemplate DataType="{x:Type vm:MenuListItemViewModel}">
+						<DataTemplate DataType="{x:Type mo:MenuListItemModel}">
 							<StackPanel Spacing="15" Orientation="Horizontal">
 								<PathIcon Data="{Binding Icon}" />
 								<TextBlock Text="{Binding Label}"

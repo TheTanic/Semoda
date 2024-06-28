@@ -11,9 +11,8 @@ namespace Semoda.ViewModels
         /// Default constructor. <br/>
         /// Sets the <see cref="ViewModelBase.IsPage"/> to <see langword="true"/>
         /// </summary>
-        public SettingsPageViewModel()
+        public SettingsPageViewModel() : base(true)
         {
-            IsPage = true;
         }
     }
 }
