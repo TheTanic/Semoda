@@ -21,13 +21,13 @@ namespace Semoda.ViewModels
 
             IPerformanceDataService dataService = ServiceProvider.GetRequiredService<IPerformanceDataService>();
 
-            _ = dataService.RegisterAsync(HandleNewPerformanceData).ContinueWith((t) =>
+            _ = dataService.RegisterAsync(HandleNewPerformanceData, Models.PerformanceDataType.TotalCPUUtilization).ContinueWith((t) =>
             {
                 _ = dataService.StartAsync();
             });
         }
 
-        private async void HandleNewPerformanceData(object sender, PerformanceDataEventArgs args)
+        private void HandleNewPerformanceData(object? sender, PerformanceDataEventArgs args)
         {
             Debug.WriteLine($"{args.Value} {args.Unit}");
         }

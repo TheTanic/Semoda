@@ -1,4 +1,5 @@
-﻿using Semoda.Models.Events;
+﻿using Semoda.Models;
+using Semoda.Models.Events;
 using System;
 using System.Threading.Tasks;
 
@@ -20,9 +21,9 @@ namespace Semoda.Services.Interfaces
         /// Register at the service, to get norified about new events.
         /// </summary>
         /// <param name="eventHandler">Handler for the <see cref="PerformanceDataEventArgs"/></param>
+        /// <param name="dataType"></param>
         /// <returns><see langword="true"/> if the handler could be registered. <see langword="false"/> otherwise.</returns>
-        Task<bool> RegisterAsync(EventHandler<PerformanceDataEventArgs> eventHandler);
-        //Task<bool> RegisterAsync(Action<object, PerformanceDataEventArgs> eventHandler);
+        Task<bool> RegisterAsync(EventHandler<PerformanceDataEventArgs> eventHandler, PerformanceDataType dataType);
 
         /// <summary>
         /// Start the collection of performance data.

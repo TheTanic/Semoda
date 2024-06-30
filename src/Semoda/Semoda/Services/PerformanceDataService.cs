@@ -1,7 +1,12 @@
-﻿using Semoda.Models.Events;
+﻿using Semoda.Extensions;
+using Semoda.Models;
+using Semoda.Models.Events;
 using Semoda.Services.Interfaces;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,6 +20,7 @@ namespace Semoda.Services
     public class PerformanceDataService : IPerformanceDataService
     {
         private CancellationTokenSource _cts;
+        private ConcurrentDictionary<PerformanceDataType, (int count, PerformanceCounter performanceCounter)> _performanceCounter;
 
         /// <summary>
         /// Stanard constructor.
@@ -22,6 +28,7 @@ namespace Semoda.Services
         public PerformanceDataService()
         {
             _cts = new CancellationTokenSource();
+            _performanceCounter = new ConcurrentDictionary<PerformanceDataType, (int count, PerformanceCounter performanceCounter)>();
         }
 
         private event EventHandler<PerformanceDataEventArgs>? NewPerformanceDataEvent = null;
@@ -33,27 +40,38 @@ namespace Semoda.Services
         }
 
         /// <inheritdoc/>
-        public Task<bool> RegisterAsync(EventHandler<PerformanceDataEventArgs> eventHandler)
+        public async Task<bool> RegisterAsync(EventHandler<PerformanceDataEventArgs> eventHandler, PerformanceDataType dataType)
         {
+            PerformanceCounter? performanceCounter = dataType.ToPerformanceCounter();
+            if (performanceCounter == null)
+                return false;
+
+            _performanceCounter.AddOrUpdate(dataType, (1, performanceCounter), (k, v) => v = (v.count++, v.performanceCounter));
             NewPerformanceDataEvent += eventHandler;
-            return Task.FromResult(true);
+            return await Task.FromResult(true);
         }
 
         /// <inheritdoc/>
-        public async Task StartAsync()
+        public Task StartAsync()
         {
-            _ = Task.Run(async () =>
+            return Task.Run(async () =>
             {
-                PerformanceCounter cpuPerformance = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-
                 while (!_cts.IsCancellationRequested)
                 {
                     await Task.Delay(1000);
-                    NewPerformanceDataEvent?.Invoke(this, new PerformanceDataEventArgs()
+                    List<PerformanceDataType> keys = _performanceCounter.Keys.ToList();
+                    foreach (var key in keys)
                     {
-                        Unit = "%",
-                        Value = cpuPerformance.NextValue()
-                    });
+                        if(_performanceCounter.TryGetValue(key, out var value))
+                        {
+                            NewPerformanceDataEvent?.Invoke(this, new PerformanceDataEventArgs()
+                            {
+                                PerformanceDataType = key,
+                                Value = value.performanceCounter.NextValue(),
+                                Unit = key.GetDefaultUnit()
+                            });
+                        }
+                    }
                 }
             }, _cts.Token);
         }
@@ -65,5 +83,5 @@ namespace Semoda.Services
         }
     }
 
-#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416
 }
