@@ -16,7 +16,7 @@ namespace Semoda.Models.Events
         /// <summary>
         /// Value of the performance data
         /// </summary>
-        public float Value { get; init; }
+        public float? Value { get; init; }
 
         /// <summary>
         /// Type of the performance data
