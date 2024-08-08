@@ -1,4 +1,9 @@
-﻿using Semoda.Views.Pages;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Semoda.Models.Events;
+using Semoda.Services.Interfaces;
+using Semoda.Utils;
+using Semoda.Views.Pages;
+using System.Diagnostics;
 
 namespace Semoda.ViewModels
 {
@@ -13,6 +18,25 @@ namespace Semoda.ViewModels
         /// </summary>
         public DashboardPageViewModel() : base(true)
         {
+            IPerformanceDataService dataService = ServiceProvider.GetRequiredService<IPerformanceDataService>();
+
+            _ = dataService.RegisterAsync(HandleCPUUtilization, Models.PerformanceDataType.TotalCPUUtilization).ContinueWith((t) =>
+            {
+                _ = dataService.StartAsync();
+                _ = dataService.RegisterAsync(HandleRAMAvailable, Models.PerformanceDataType.TotalRAMAvailable);
+            });
+        }
+
+        private void HandleCPUUtilization(object? sender, PerformanceDataEventArgs args)
+        {
+            if (args.PerformanceDataType == Models.PerformanceDataType.TotalCPUUtilization)
+                Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit}");
+        }
+
+        private void HandleRAMAvailable(object? sender, PerformanceDataEventArgs args)
+        {
+            if (args.PerformanceDataType == Models.PerformanceDataType.TotalRAMAvailable)
+                Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit} / {SystemInfoUtil.GetTotalPhysicalMemoryMB()} {args.Unit}");
         }
     }
 }
