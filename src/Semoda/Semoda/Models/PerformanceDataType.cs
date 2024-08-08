@@ -11,13 +11,8 @@
         TotalCPUUtilization,
 
         /// <summary>
-        /// Temperature of the cpu
-        /// </summary>
-        CPUTemperature,
-
-        /// <summary>
         /// Total available memory
         /// </summary>
-        TotalRAMAvailable,
+        TotalRAMAvailable
     }
 }

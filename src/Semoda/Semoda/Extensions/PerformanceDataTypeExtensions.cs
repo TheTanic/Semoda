@@ -25,9 +25,6 @@ namespace Semoda.Extensions
                 case PerformanceDataType.TotalRAMAvailable:
                     return "MB";
 
-                case PerformanceDataType.CPUTemperature:
-                    return "°C";
-
                 default:
                     return "";
             }
@@ -52,8 +49,6 @@ namespace Semoda.Extensions
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         return new PerformanceDataCollectorWindows(new PerformanceCounter("Memory", "Available MBytes"));
                     break;
-
-                case PerformanceDataType.CPUTemperature:
 
                 default:
                     return null;

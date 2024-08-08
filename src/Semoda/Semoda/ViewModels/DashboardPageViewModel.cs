@@ -24,14 +24,7 @@ namespace Semoda.ViewModels
             {
                 _ = dataService.StartAsync();
                 _ = dataService.RegisterAsync(HandleRAMAvailable, Models.PerformanceDataType.TotalRAMAvailable);
-                _ = dataService.RegisterAsync(HandleCPUTemp, Models.PerformanceDataType.CPUTemperature);
             });
-        }
-
-        private void HandleCPUTemp(object? sender, PerformanceDataEventArgs args)
-        {
-            if (args.PerformanceDataType == Models.PerformanceDataType.CPUTemperature)
-                Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit}");
         }
 
         private void HandleCPUUtilization(object? sender, PerformanceDataEventArgs args)
