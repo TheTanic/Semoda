@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Semoda.Models;
 using Semoda.ViewModels;
+using System.IO;
 
 namespace Semoda.Extensions
 {
@@ -18,6 +21,18 @@ namespace Semoda.Extensions
             collection.AddSingleton<MainWindowViewModel>();
             collection.AddSingleton<DashboardPageViewModel>();
             collection.AddSingleton<SettingsPageViewModel>();
+
+            {
+                // Load settings from JSON and add for dependency injection
+                var configuration = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                   .Build();
+
+                var appSettings = new AppSettingsModel();
+                configuration.Bind(appSettings);
+                collection.AddSingleton(appSettings);
+            }
         }
     }
 }
