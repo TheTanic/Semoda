@@ -13,8 +13,8 @@ namespace Semoda.Services {
     {
 		private event EventHandler<EventArgs>? SettingsChangedEvent = null;
 		private AppSettingsModel _appSettings;
-		private const string SettingsFileName = "appsettings.json";
-		private const string SettingsFolderName = "Semoda";
+		private const string SETTINGS_FILE_NAME = "appsettings.json";
+		private const string SETTINGS_FOLDER_NAME = "Semoda";
 
 		/// <summary>
 		/// Loads the settings json file from the file system, first creating
@@ -23,7 +23,7 @@ namespace Semoda.Services {
 		public ConfigService()
 		{
 			string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			string fileName = Path.Combine(folder, SettingsFolderName, SettingsFileName);
+			string fileName = Path.Combine(folder, SETTINGS_FOLDER_NAME, SETTINGS_FILE_NAME);
 
 			if(!File.Exists(fileName))
 			{
@@ -55,7 +55,7 @@ namespace Semoda.Services {
             try
 			{
 				string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-				string fileName = Path.Combine(folder, SettingsFolderName, SettingsFileName);
+				string fileName = Path.Combine(folder, SETTINGS_FOLDER_NAME, SETTINGS_FILE_NAME);
 
 				if(!File.Exists(fileName))
 				{
