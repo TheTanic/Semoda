@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using Semoda.Models;
@@ -14,7 +15,7 @@ namespace Semoda.Services {
 		private event EventHandler<EventArgs>? SettingsChangedEvent = null;
 		private AppSettingsModel _appSettings;
 		private const string SETTINGS_FILE_NAME = "appsettings.json";
-		private const string SETTINGS_FOLDER_NAME = "Semoda";
+		private static readonly string SETTINGS_FOLDER_NAME = AppDomain.CurrentDomain.FriendlyName;
 
 		/// <summary>
 		/// Loads the settings json file from the file system, first creating
