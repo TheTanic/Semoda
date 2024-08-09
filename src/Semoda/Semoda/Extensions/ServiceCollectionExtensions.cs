@@ -18,8 +18,9 @@ namespace Semoda.Extensions
         {
             //Services
             collection.AddSingleton<IPerformanceDataService, PerformanceDataService>();
+            collection.AddSingleton<IConfigService, ConfigService>();
 
-            //ViewModels
+            // ViewModels
             collection.AddSingleton<MainWindowViewModel>();
             collection.AddSingleton<DashboardPageViewModel>();
             collection.AddSingleton<SettingsPageViewModel>();
