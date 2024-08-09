@@ -27,9 +27,6 @@ namespace Semoda.ViewModels
             _configService.Register(HandleSettingsChanged);
 
             AppSettingsModel = _configService.GetAppSettings();
-            
-            AppSettingsModel.Language = "de";
-            _configService.Update(AppSettingsModel);
         }
 
         private void HandleSettingsChanged(object? sender, EventArgs e)

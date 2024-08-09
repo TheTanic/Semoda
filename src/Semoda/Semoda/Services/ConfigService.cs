@@ -13,6 +13,8 @@ namespace Semoda.Services {
     {
 		private event EventHandler<EventArgs>? SettingsChangedEvent = null;
 		private AppSettingsModel _appSettings;
+		private const string SettingsFileName = "appsettings.json";
+		private const string SettingsFolderName = "Semoda";
 
 		/// <summary>
 		/// Loads the settings json file from the file system, first creating
@@ -20,12 +22,17 @@ namespace Semoda.Services {
 		/// </summary>
 		public ConfigService()
 		{
-			if(!File.Exists("appsettings.json"))
+			string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			string fileName = Path.Combine(folder, SettingsFolderName, SettingsFileName);
+
+			if(!File.Exists(fileName))
 			{
-				File.WriteAllText("appsettings.json", JsonSerializer.Serialize(new AppSettingsModel(), new JsonSerializerOptions { WriteIndented = true }));
+				FileInfo fileInfo = new FileInfo(fileName);
+				fileInfo.Directory?.Create();
+				File.WriteAllText(fileName, JsonSerializer.Serialize(new AppSettingsModel(), new JsonSerializerOptions { WriteIndented = true }));
 			}
 
-			string fileContent = File.ReadAllText("appsettings.json");
+			string fileContent = File.ReadAllText(fileName);
 			_appSettings = JsonSerializer.Deserialize<AppSettingsModel>(fileContent) ?? new AppSettingsModel();
 		}
 
@@ -47,7 +54,16 @@ namespace Semoda.Services {
             var json = JsonSerializer.Serialize(newSettings, new JsonSerializerOptions { WriteIndented = true });
             try
 			{
-				File.WriteAllText("appsettings.json", json);
+				string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+				string fileName = Path.Combine(folder, SettingsFolderName, SettingsFileName);
+
+				if(!File.Exists(fileName))
+				{
+					FileInfo fileInfo = new FileInfo(fileName);
+					fileInfo.Directory?.Create();
+				}
+
+				File.WriteAllText(fileName, json);
 			}
 			catch(Exception)
 			{
