@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Semoda.Services;
+using Semoda.Services.Interfaces;
 using Semoda.ViewModels;
 
 namespace Semoda.Extensions
@@ -14,7 +16,9 @@ namespace Semoda.Extensions
         /// <param name="collection">Collection, where the services should be added.</param>
         public static void AddAppServices(this IServiceCollection collection)
         {
-            //ViewModels
+            collection.AddSingleton<IConfigService, ConfigService>();
+
+            // ViewModels
             collection.AddSingleton<MainWindowViewModel>();
             collection.AddSingleton<DashboardPageViewModel>();
             collection.AddSingleton<SettingsPageViewModel>();
