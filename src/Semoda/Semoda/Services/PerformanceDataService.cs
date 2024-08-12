@@ -17,8 +17,10 @@ namespace Semoda.Services
     /// </summary>
     public class PerformanceDataService : IPerformanceDataService
     {
+        private static readonly int DEFAULT_POLLING_DELAY_MS = 1000;
         private CancellationTokenSource _cts;
         private ConcurrentDictionary<PerformanceDataType, (int count, IPerformanceDataCollector performanceDataCollector)> _performanceDataCollectors;
+        private int _pollingDelayMS = DEFAULT_POLLING_DELAY_MS;
 
         /// <summary>
         /// Stanard constructor.
@@ -56,7 +58,7 @@ namespace Semoda.Services
             {
                 while (!_cts.IsCancellationRequested)
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay(_pollingDelayMS);
                     List<PerformanceDataType> keys = _performanceDataCollectors.Keys.ToList();
                     foreach (var key in keys)
                     {

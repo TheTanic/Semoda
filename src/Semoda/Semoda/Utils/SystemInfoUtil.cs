@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Semoda.Utils
 {
     /// <summary>
-    /// Util class to get informations about the system.
+    /// Util class to get information about the system.
     /// </summary>
     public class SystemInfoUtil
     {

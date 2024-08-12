@@ -11,14 +11,14 @@ namespace Semoda.Services.Interfaces
     public interface IPerformanceDataService
     {
         /// <summary>
-        /// Deregister at the service, to get norified about new events.
+        /// Deregister at the service, to no longet get notified about new events.
         /// </summary>
         /// <param name="eventHandler">Registered handler for the <see cref="PerformanceDataEventArgs"/></param>
         /// <returns><see langword="true"/> if the handler could be deregistered. <see langword="false"/> otherwise.</returns>
         Task<bool> DeregisterAsync(Action<object, PerformanceDataEventArgs> eventHandler);
 
         /// <summary>
-        /// Register at the service, to get norified about new events.
+        /// Register at the service, to get notified about new events.
         /// </summary>
         /// <param name="eventHandler">Handler for the <see cref="PerformanceDataEventArgs"/></param>
         /// <param name="dataType"></param>

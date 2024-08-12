@@ -20,23 +20,25 @@ namespace Semoda.ViewModels
         {
             IPerformanceDataService dataService = ServiceProvider.GetRequiredService<IPerformanceDataService>();
 
-            _ = dataService.RegisterAsync(HandleCPUUtilization, Models.PerformanceDataType.TotalCPUUtilization).ContinueWith((t) =>
+            _ = dataService.RegisterAsync(HandleNewData, Models.PerformanceDataType.TotalCPUUtilization).ContinueWith((t) =>
             {
                 _ = dataService.StartAsync();
-                _ = dataService.RegisterAsync(HandleRAMAvailable, Models.PerformanceDataType.TotalRAMAvailable);
+                _ = dataService.RegisterAsync(HandleNewData, Models.PerformanceDataType.TotalRAMAvailable);
             });
         }
 
-        private void HandleCPUUtilization(object? sender, PerformanceDataEventArgs args)
+        private void HandleNewData(object? sender, PerformanceDataEventArgs args)
         {
-            if (args.PerformanceDataType == Models.PerformanceDataType.TotalCPUUtilization)
-                Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit}");
-        }
+            switch (args.PerformanceDataType)
+            {
+                case Models.PerformanceDataType.TotalRAMAvailable:
+                    Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit} / {SystemInfoUtil.GetTotalPhysicalMemoryMB()} {args.Unit}");
+                    break;
 
-        private void HandleRAMAvailable(object? sender, PerformanceDataEventArgs args)
-        {
-            if (args.PerformanceDataType == Models.PerformanceDataType.TotalRAMAvailable)
-                Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit} / {SystemInfoUtil.GetTotalPhysicalMemoryMB()} {args.Unit}");
+                default:
+                    Debug.WriteLine($"{args.PerformanceDataType}: {args.Value} {args.Unit}");
+                    break;
+            }
         }
     }
 }
