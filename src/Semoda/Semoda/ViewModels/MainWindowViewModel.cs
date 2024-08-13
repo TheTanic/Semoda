@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
 using Semoda.Assets.Languages;
 using Semoda.Models;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 

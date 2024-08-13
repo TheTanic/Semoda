@@ -16,6 +16,8 @@ namespace Semoda.Extensions
         /// <param name="collection">Collection, where the services should be added.</param>
         public static void AddAppServices(this IServiceCollection collection)
         {
+            //Services
+            collection.AddSingleton<IPerformanceDataService, PerformanceDataService>();
             collection.AddSingleton<IConfigService, ConfigService>();
 
             // ViewModels

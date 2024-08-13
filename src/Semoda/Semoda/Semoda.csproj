@@ -7,6 +7,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +19,6 @@
     <AvaloniaResource Remove="Assets\Languages\Resources.de-DE.resx" />
     <AvaloniaResource Remove="Assets\Languages\Resources.Designer.cs" />
     <AvaloniaResource Remove="Assets\Languages\Resources.resx" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +45,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -36,7 +36,7 @@
 										   Grid.Row="2"
 										   Grid.ColumnSpan="2"/>
 			<ctr:DashboardElementContainer Grid.Column="0"
-										   Grid.Row="4"/>
+										   Grid.Row="3"/>
 			<ctr:DashboardElementContainer Grid.Column="1"
 										   Grid.Row="3"
 										   Grid.ColumnSpan="2"/>
