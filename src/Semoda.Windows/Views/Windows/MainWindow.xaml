@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Semoda.Windows.Views.Windows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Semoda.Windows.Models"
+    mc:Ignorable="d"
+    Title="Semoda"
+    >
+
+    <Grid>
+        <NavigationView
+            IsSettingsVisible="True"
+            IsBackButtonVisible="Collapsed"
+            SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=OneWay}"
+            MenuItemsSource="{x:Bind ViewModel.MenuItems}"
+            SelectionChanged="NavigationView_SelectionChanged">
+
+            <NavigationView.MenuItemTemplate>
+                <DataTemplate x:DataType="models:NavigationItem">
+                    <NavigationViewItem Content="{x:Bind Label}" Icon="{x:Bind Icon}" />
+                </DataTemplate>
+            </NavigationView.MenuItemTemplate>
+
+            <Frame x:Name="ContentFrame" />
+        </NavigationView>
+    </Grid>
+</Window>

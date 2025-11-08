@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Semoda.Windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Semoda.Windows (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
